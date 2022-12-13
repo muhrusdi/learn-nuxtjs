@@ -5,7 +5,16 @@
       <top-header/>
       <div class="container">
         <div class="content-inner">
-          <Nuxt />
+          <div>
+            <div>
+              <h2 class="text-2xl font-bold">Muhammad Rusdi</h2>
+              <p class="mt-1">Level 1 - #SG769891</p>
+            </div>
+            <div>
+              <tabs/>
+              <Nuxt />
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -15,11 +24,13 @@
 <script>
 import Nav from "../components/nav/index.vue"
 import Header from "../components/header/index.vue"
+import Tabs from "../components/tabs/index.vue"
 
 export default {
   components: {
     navgigation: Nav,
-    "top-header": Header
+    "top-header": Header,
+    tabs: Tabs,
   }
 }
 </script>
@@ -31,8 +42,8 @@ export default {
 
   .container {
     max-width: 642px;
-    padding-left: 14px;
-    padding-right: 14px;
+    padding-left: 18px;
+    padding-right: 18px;
     margin: 0 auto;
   }
   .content-inner {

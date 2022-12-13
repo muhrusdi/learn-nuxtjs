@@ -1,21 +1,29 @@
 <template>
   <div>
     <ul class="flex mt-8">
-      <li class="active">
-        <a href="#">Information</a>
-      </li>
-      <li>
-        <a href="#">Career</a>
-      </li>
-      <li>
-        <a href="#">Education</a>
-      </li>
-      <li>
-        <a href="#">Gallery</a>
+      <li v-for="menu in menus" :key="menu.id" :class="(menu.path === getPath) ? 'active' : ''">
+        <NuxtLink :to="menu.path">{{menu.label}}</NuxtLink>
       </li>
     </ul>
   </div>
 </template>
+
+<script> 
+import { menus } from "../../utils"
+
+export default {
+  data() {
+    return {
+      menus,
+    }
+  },
+  computed: {
+    getPath() {
+      return this.$route.path
+    }
+  }
+}
+</script>
 
 <style scoped>
 ul {
@@ -24,11 +32,12 @@ ul {
 }
 
 ul li {
-  padding: 10px 16px;
   position: relative;
 }
 
 ul li a {
+  padding: 10px 16px;
+  display: block;
   color: #818191;
 }
 

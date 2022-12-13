@@ -3,8 +3,8 @@
     <div class="flex justify-between">
       <div>
         <div>
-          <h3 class="text-xl font-medium">Profile Information</h3>
-          <p class="text-sm mt-1 text-gray-400">Your personal data</p>
+          <h3 class="text-xl font-medium">{{title}}</h3>
+          <p class="text-sm mt-1 text-gray-400">{{description}}</p>
         </div>
       </div>
       <div>
@@ -17,6 +17,11 @@
   </div>
 </template>
 
+<script>
+export default {
+  props: ["title", "description"]
+}
+</script>
 
 <style scoped>
 .box {
