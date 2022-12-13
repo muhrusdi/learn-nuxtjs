@@ -14,10 +14,11 @@
                 <div>
                   <h4>Information Detail</h4>
                 </div>
-                <div>
+                <div class="mt-6">
                   <v-text-field
                     label="Name"
                     required
+                    outlined
                   ></v-text-field>
                 </div>
                 <div>
@@ -71,12 +72,14 @@
                   <v-text-field
                     label="Hometown"
                     required
+                    outlined
                   ></v-text-field>
                 </div>
                 <div>
                   <v-textarea
                     name="input-7-1"
                     label="Bio"
+                    outlined
                   ></v-textarea>
                 </div>
               </div>
@@ -86,7 +89,7 @@
                 <div>
                   <h4>Profile Picture</h4>
                 </div>
-                <div class="mt-4">
+                <div class="mt-6">
                   <img class="rounded-md" src="https://images.unsplash.com/photo-1670832215724-cce6d9ee619c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80" alt="">
                 </div>
                 <div class="mt-4 space-y-3 text-center">
