@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    background-color: #282A36;
+    color: white;
+  }
+
+  body {
+    font-size: 16px;
+  }
+}

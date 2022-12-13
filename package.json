@@ -1,0 +1,19 @@
+{
+  "name": "my-app",
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "start": "nuxt start"
+  },
+  "dependencies": {
+    "@heroicons/vue": "^2.0.13",
+    "@mdi/font": "^7.1.96",
+    "@nuxtjs/vuetify": "^1.12.3",
+    "nuxt": "2.15.4"
+  },
+  "devDependencies": {
+    "@nuxtjs/tailwindcss": "4.2.1",
+    "postcss-pxtorem": "^6.0.0"
+  }
+}
