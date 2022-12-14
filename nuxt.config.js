@@ -24,12 +24,15 @@ export default {
     '@nuxtjs/vuetify',
   ],
   vuetify: {
-    optionsPath: './vuetify.config.js'
+    optionsPath: './plugins/vuetify.js'
   },
   css: [
     './styles/global.css',
   ],
   modules: [
     '@nuxtjs/tailwindcss'
+  ],
+  plugins: [
+    { src: './plugins/vuelidate.js' }
   ]
 }

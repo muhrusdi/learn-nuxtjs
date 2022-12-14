@@ -8,9 +8,9 @@
   },
   "dependencies": {
     "@heroicons/vue": "^2.0.13",
-    "@mdi/font": "^7.1.96",
     "@nuxtjs/vuetify": "^1.12.3",
-    "nuxt": "2.15.4"
+    "nuxt": "2.15.4",
+    "vuelidate": "^0.7.7"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "4.2.1",
