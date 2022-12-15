@@ -32,7 +32,7 @@
                 <p class="mt-1">Level 1 - #SG769891</p>
               </div>
               <div>
-                <tabs/>
+                <tabs :data="menus"/>
                 <Nuxt />
               </div>
             </div>
@@ -47,8 +47,14 @@
 import Nav from "../components/nav/index.vue"
 import Header from "../components/header/index.vue"
 import Tabs from "../components/tabs/index.vue"
+import { menus } from "../utils"
 
 export default {
+  data() {
+    return {
+      menus
+    }
+  },
   components: {
     navgigation: Nav,
     "top-header": Header,

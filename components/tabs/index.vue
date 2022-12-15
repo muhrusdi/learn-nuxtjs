@@ -9,12 +9,12 @@
 </template>
 
 <script> 
-import { menus } from "../../utils"
 
 export default {
+  props: ["data"],
   data() {
     return {
-      menus,
+      menus: this.data,
     }
   },
   computed: {
