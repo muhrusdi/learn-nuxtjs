@@ -84,6 +84,12 @@ export default {
           device_type: 2, 
           ...this.fields
         })
+        .then(data => {
+          console.log("--res", data)
+        })
+        .catch(err => {
+          console.log("--err", err.response)
+        })
       }
     }
   }

@@ -30,14 +30,14 @@ export default {
 }
 </script>
 
-<style >
+<style>
 .v-otp-input .v-input__slot {
     margin-bottom: 0;
     border-radius: 4px;
     overflow: hidden;
 }
 
-.v-otp-input .v-input__slot .v-text-field input {
+.v-otp-input .v-input__slot .v-text-field__slot input {
   max-height: 3rem;
   line-height: 1.28rem;
 }

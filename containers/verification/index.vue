@@ -7,10 +7,10 @@
             <div class="flex items-center space-x-3">
               <div>
                 <p-otp-input
-                  label="Phone Number"
+                  label="OTP"
                   :fields="fields"
                   :vFields="$v.fields"
-                  name="phone"
+                  name="otp"
                   message="Tidak boleh kosong"
                   validation="required"
                 />
@@ -54,21 +54,19 @@
 import Box from "../../components/box/index.vue"
 import { required } from 'vuelidate/lib/validators'
 import OTPInput from "../../components/form/otp-input"
-import { postLogin } from "../../hooks/api"
+import { postVerfication } from "../../hooks/api"
 
 export default {
   data() {
     return {
       fields: {
-        phone: "",
-        password: ""
+        otp: "",
       }
     }
   },
   validations: {
     fields: {
-      phone: {required},
-      password: {required}
+      otp: {required},
     }
   },
   components: {
@@ -79,10 +77,7 @@ export default {
     handleSubmit() {
       this.$v.$touch()
       if (!this.$v.error) {
-        postLogin({
-          latlong: "",
-          device_token: "",
-          device_type: 2, 
+        postVerfication({
           ...this.fields
         })
       }
