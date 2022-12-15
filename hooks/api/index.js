@@ -74,8 +74,9 @@ export const postRegister = (formData) => {
   return axios.post(baseURL(`register`), formData)
 }
 
+// user_id: string, otp_code: string
 export const postVerfication = (formData) => {
-  return axios.post(baseURL(`register/otp/request`), formData)
+  return axios.post(baseURL(`register/otp/match`), formData)
 }
 
 export const getCountryCode = () => {
