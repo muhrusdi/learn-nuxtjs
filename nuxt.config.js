@@ -34,5 +34,8 @@ export default {
   ],
   plugins: [
     { src: './plugins/vuelidate.js' }
-  ]
+  ],
+  env: {
+    baseUrl: process.env.BASE_URL
+  }
 }
