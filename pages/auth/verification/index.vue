@@ -8,7 +8,7 @@
 import Verification from "../../../containers/verification/index.vue"
 
 export default {
-  layout: 'auth',
+  layout: 'verification',
   components: {
     verification: Verification
   }
