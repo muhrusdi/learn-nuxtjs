@@ -69,19 +69,28 @@
               <div>
                 <h4>Profile Picture</h4>
               </div>
-              <div class="mt-6">
-                <img class="rounded-md" :src="fields.profilePicture" alt="">
-              </div>
-              <div class="mt-6 space-y-3 text-center">
-                <v-btn
-                  depressed
-                  color="primary"
-                  width="100%"
-                >
-                  Upload Media
-                </v-btn>
-                <p class="text-xs text-gray-400 font-medium">PNG, JPG or GIF up to 2MB</p>
-              </div>
+              <p-photo-upload
+                :fields="fields"
+                :vFields="$v.fields"
+                name="profilePicture"
+              >
+                <div class="mt-6">
+                  <img class="rounded-md" :src="fields.profilePicture" alt="">
+                </div>
+                <template  v-slot:button>
+                  <div ref="uploadButton" class="mt-6 space-y-3 text-center">
+                    <v-btn
+                      depressed
+                      color="primary"
+                      width="100%"
+                      @click="handleUpload"
+                    >
+                      Upload Media
+                    </v-btn>
+                    <p class="text-xs text-gray-400 font-medium">PNG, JPG or GIF up to 2MB</p>
+                  </div>
+                </template>
+              </p-photo-upload>
             </div>
           </div>
         </div>
@@ -115,6 +124,7 @@ import Input from "../../components/form/input/index.vue"
 import Textarea from "../../components/form/textarea/index.vue"
 import Select from "../../components/form/select/index.vue"
 import DatePicker from "../../components/form/date-picker/index.vue"
+import PhotoUpload from "../../components/form/photo-upload/index.vue"
 
 export default {
   data() {
@@ -141,17 +151,23 @@ export default {
     }
   },
   components: {
-    box: Box,
+    "box": Box,
     "p-input": Input,
     "p-textarea": Textarea,
     "p-select": Select,
     "p-datepicker": DatePicker,
+    "p-photo-upload": PhotoUpload
   },
   methods: {
+    handleUpload() {
+      this.$refs.uploadButton.nextElementSibling.click()
+    },
     handleSubmit() {
       this.$v.$touch()
-      console.log("---", this.fields, this.$v)
     }
   },
+  mounted() {
+    console.log("---", this)
+  }
 }
 </script>
