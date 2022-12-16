@@ -45,6 +45,20 @@
           </v-btn>
         </div>
       </div>
+      <v-snackbar
+        v-model="isLoggedFailed"
+      >
+        <template v-slot:action="{ attrs }">
+          <v-btn
+            color="pink"
+            text
+            v-bind="attrs"
+            @click="snackbar = false"
+          >
+            {{message}}
+          </v-btn>
+        </template>
+      </v-snackbar>
     </form>
   </div>
 </template>
@@ -53,7 +67,7 @@
 import Box from "../../components/box/index.vue"
 import { required } from 'vuelidate/lib/validators'
 import Input from "../../components/form/input"
-import { postLogin } from "../../hooks/api"
+import { postLogin, postOTPRequest } from "../../hooks/api"
 
 export default {
   data() {
@@ -61,13 +75,19 @@ export default {
       fields: {
         phone: "",
         password: ""
-      }
+      },
+      message: ""
     }
   },
   validations: {
     fields: {
       phone: {required},
       password: {required}
+    }
+  },
+  computed: {
+    isLoggedFailed() {
+      return Boolean(this.message)
     }
   },
   components: {
@@ -77,7 +97,7 @@ export default {
   methods: {
     handleSubmit() {
       this.$v.$touch()
-      if (!this.$v.error) {
+      if (!this.$v.$error) {
         postLogin({
           latlong: "",
           device_token: "",
@@ -86,9 +106,21 @@ export default {
         })
         .then(data => {
           console.log("--res", data)
+          // this.$router.push({ path: '/auth/verification', query: { id:  data.error.errors[0].user_id} })
         })
         .catch(err => {
+          const data = err.response.data
           console.log("--err", err.response)
+          if (err.response.status === 401) {
+            postOTPRequest({phone: this.fields.phone}).then(() => {
+              window.location.href = '/auth/verification' + "?id=" + data.error.errors[0].user_id
+            })
+          } else if (err.response.status === 422) {
+            if (data.error.errors.length) {
+              const message = data.error.errors[0]
+              this.message = message
+            }
+          }
         })
       }
     }

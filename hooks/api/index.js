@@ -79,6 +79,10 @@ export const postVerfication = (formData) => {
   return axios.post(baseURL(`register/otp/match`), formData)
 }
 
+export const postOTPRequest = (formData) => {
+  return axios.post(baseURL(`register/otp/request`), formData)
+}
+
 export const getCountryCode = () => {
     return fetch(window.location.origin + "/phone.json").then(d => d.json())
 }

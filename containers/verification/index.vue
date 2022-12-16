@@ -78,7 +78,11 @@ export default {
       this.$v.$touch()
       if (!this.$v.error) {
         postVerfication({
-          ...this.fields
+          user_id: this.$route.query.id,
+          otp_code: this.fields.otp
+        })
+        .then(() => {
+          window.location.href = "/auth/login"
         })
       }
     }
