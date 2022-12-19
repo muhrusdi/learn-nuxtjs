@@ -35,13 +35,13 @@
             outlined
             color="primary"
           >
-          <v-icon
-            right
-            dark
-            class="mr-2"
-          >
-          mdi-restart
-          </v-icon>
+            <v-icon
+              right
+              dark
+              class="mr-2"
+            >
+            mdi-restart
+            </v-icon>
             Resend OTP Code
           </v-btn>
         </div>
@@ -54,7 +54,7 @@
 import Box from "../../components/box/index.vue"
 import { required } from 'vuelidate/lib/validators'
 import OTPInput from "../../components/form/otp-input"
-import { postVerfication } from "../../hooks/api"
+import { setToken } from '../../utils'
 
 export default {
   data() {
@@ -77,11 +77,14 @@ export default {
     handleSubmit() {
       this.$v.$touch()
       if (!this.$v.error) {
-        postVerfication({
+        this.$store.dispatch("profile/postVerification",{
           user_id: this.$route.query.id,
           otp_code: this.fields.otp
         })
-        .then(() => {
+        .then((data) => {
+          console.log("---ver", data)
+          const token = data.data.data.user.access_token
+          setToken(token)
           window.location.href = "/auth/login"
         })
       }

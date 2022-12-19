@@ -30,11 +30,20 @@ export default {
     './styles/global.css',
   ],
   modules: [
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
+    '@nuxtjs/axios'
   ],
   plugins: [
-    { src: './plugins/vuelidate.js' }
+    { src: './plugins/vuelidate.js' },
+    './plugins/axios.js'
   ],
+  axios: { proxy: true },
+  proxy: {
+    '/custom/': {
+      target: process.env.API_BASE_URL,
+      pathRewrite: { '^/custom/': '/api/v1/' },
+    },
+  },
   env: {
     baseUrl: process.env.BASE_URL
   }

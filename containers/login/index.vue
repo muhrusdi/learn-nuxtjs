@@ -67,7 +67,6 @@
 import Box from "../../components/box/index.vue"
 import { required } from 'vuelidate/lib/validators'
 import Input from "../../components/form/input"
-import { postLogin, postOTPRequest } from "../../hooks/api"
 
 export default {
   data() {
@@ -98,7 +97,7 @@ export default {
     handleSubmit() {
       this.$v.$touch()
       if (!this.$v.$error) {
-        postLogin({
+        this.$store.dispatch("profile/postLogin", {
           latlong: "",
           device_token: "",
           device_type: 2, 
@@ -112,9 +111,9 @@ export default {
           const data = err.response.data
           console.log("--err", err.response)
           if (err.response.status === 401) {
-            postOTPRequest({phone: this.fields.phone}).then(() => {
-              window.location.href = '/auth/verification' + "?id=" + data.error.errors[0].user_id
-            })
+            // this.$store.dispatch("profile/postOTPRequest", {phone: this.fields.phone}).then(() => {
+            //   window.location.href = '/auth/verification' + "?id=" + data.error.errors[0].user_id
+            // })
           } else if (err.response.status === 422) {
             if (data.error.errors.length) {
               const message = data.error.errors[0]

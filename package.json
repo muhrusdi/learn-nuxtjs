@@ -8,11 +8,12 @@
   },
   "dependencies": {
     "@heroicons/vue": "^2.0.13",
+    "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/vuetify": "^1.12.3",
-    "axios": "^1.2.1",
     "js-cookie": "^3.0.1",
     "nuxt": "2.15.4",
-    "vuelidate": "^0.7.7"
+    "vuelidate": "^0.7.7",
+    "vuex-easy-access": "^3.1.8"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "4.2.1",

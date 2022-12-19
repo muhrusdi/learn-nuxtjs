@@ -65,7 +65,6 @@
 import Box from "../../components/box/index.vue"
 import { required } from 'vuelidate/lib/validators'
 import Input from "../../components/form/input"
-import { postRegister, getCountryCode, getCountryName } from "../../hooks/api"
 import Select from "../../components/form/select"
 
 export default {
@@ -88,11 +87,11 @@ export default {
     }
   },
   mounted() {
-    getCountryCode().then(d => {
+    this.$store.dispatch("profile/getCountryCode").then(d => {
       this.countryCodes = d
     })
 
-    getCountryName().then(d => {
+    this.$store.dispatch("profile/getCountryName").then(d => {
       this.countryNames = d
     })
   },
@@ -124,12 +123,15 @@ export default {
     handleSubmit() {
       this.$v.$touch()
       if (!this.$v.error) {
-        postRegister({
+        this.$store.dispatch("profile/postRegister", {
           ...this.fields,
           phone: this.fields.country + this.fields.phone,
           latlong: "",
           device_token: "",
           device_type: 2, 
+        })
+        .then(() => {
+          window.location.href = "/auth/login"
         })
       }
     }

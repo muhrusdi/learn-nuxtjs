@@ -118,7 +118,6 @@
 </template>
 
 <script>
-import { getProfile } from "../../hooks/api/index"
 import Box from "../../components/box"
 import { required } from 'vuelidate/lib/validators'
 import Input from "../../components/form/input/index.vue"
@@ -141,11 +140,6 @@ export default {
       }
     }
   },
-  mounted() {
-    const data = getProfile().then(d => d)
-
-    console.log("---data", data)
-  },  
   validations: {
     fields: {
       name: {required},
