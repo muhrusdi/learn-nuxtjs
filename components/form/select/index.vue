@@ -1,13 +1,13 @@
 <template>
   <div>
-    <v-select
+    <v-combobox
       :items="items"
       :label="label"
       v-model="fields[name]"
       :error-messages="errors"
       @input="vFields[name].$touch()"
       @blur="vFields[name].$touch()"
-    ></v-select>
+    />
   </div>
 </template>
 
