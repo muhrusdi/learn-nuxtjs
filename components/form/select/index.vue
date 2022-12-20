@@ -38,5 +38,6 @@ export default {
 
 .v-text-field--solo.error--text > .v-input__control > [role=combobox].v-input__slot {
   border-bottom: 1px solid #ff5252 !important;
+  border-bottom-width: 2px !important;
 }
 </style>

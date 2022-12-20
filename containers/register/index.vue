@@ -4,7 +4,7 @@
     <form @submit.prevent="handleSubmit">
       <box title="Create New Account" description="Before you can join here, please create new account">
         <div>
-          <div class="mt-6 space-y-4">
+          <div class="mt-6 space-y-2">
             <div>
               <p-select
                 label="Select Country"
