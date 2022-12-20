@@ -4,7 +4,7 @@
     <form @submit.prevent="handleSubmit">
       <box title="Create New Account" description="Before you can join here, please create new account">
         <div>
-          <div class="mt-6 space-y-6">
+          <div class="mt-6 space-y-4">
             <div>
               <p-select
                 label="Select Country"
@@ -51,7 +51,7 @@
         <div>
           <v-btn
             depressed
-            type="submit" @click="handleSubmit"
+            type="submit"
             color="primary"
           >
             Register

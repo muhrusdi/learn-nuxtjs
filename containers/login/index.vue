@@ -3,7 +3,7 @@
     <form @submit.prevent="handleSubmit">
       <box title="Login Account">
         <div>
-          <div class="mt-6">
+          <div class="mt-4 space-y-6">
             <div>
               <p-input
                 label="Phone Number"
@@ -40,7 +40,7 @@
         <div>
           <v-btn
             depressed
-            type="submit" @click="handleSubmit"
+            type="submit"
             color="primary"
           >
             Login
