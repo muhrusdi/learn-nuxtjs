@@ -20,6 +20,8 @@
                 :fields="fields"
                 :vFields="$v.fields"
                 name="password"
+                type="password"
+                append-icon="mdi-eye"
                 message="Tidak boleh kosong"
                 validation="required"
               />

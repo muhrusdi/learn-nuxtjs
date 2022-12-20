@@ -7,13 +7,23 @@
       :error-messages="errors"
       @input="vFields[name].$touch()"
       @blur="vFields[name].$touch()"
+      :type="inputType"
+      v-bind="$attrs"
+      :append-icon="type === 'password' ? (visiblePass ? 'mdi-eye-off' : 'mdi-eye') : ''"
+      @click:append="type === 'password' ? handleSwitch() : null"
     />
   </div>
 </template>
 
 <script>
 export default {
-  props: ["label", "fields", "vFields", "name", "message", "validation"],
+  props: ["label", "fields", "vFields", "name", "message", "validation", "type"],
+  data() {
+    return {
+      inputType: this.type,
+      visiblePass: false
+    }
+  },
   computed: {
     errors() {
         const errors = []
@@ -24,5 +34,11 @@ export default {
         return errors
       },
   },
+  methods: {
+    handleSwitch() {
+      this.visiblePass = !this.visiblePass
+      this.inputType = this.visiblePass ? "text" : "password"
+    }
+  }
 }
 </script>

@@ -4,7 +4,7 @@
     <form @submit.prevent="handleSubmit">
       <box title="Create New Account" description="Before you can join here, please create new account">
         <div>
-          <div class="mt-6">
+          <div class="mt-6 space-y-6">
             <div>
               <p-select
                 label="Select Country"
@@ -32,6 +32,7 @@
                 :fields="fields"
                 :vFields="$v.fields"
                 name="password"
+                type="password"
                 message="Tidak boleh kosong"
                 validation="required"
               />
@@ -122,7 +123,7 @@ export default {
   methods: {
     handleSubmit() {
       this.$v.$touch()
-      if (!this.$v.error) {
+      if (!this.$v.$error) {
         this.$store.dispatch("profile/postRegister", {
           ...this.fields,
           phone: this.fields.country + this.fields.phone,
