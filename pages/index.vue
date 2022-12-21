@@ -8,6 +8,7 @@
 import Home from "../containers/home/index.vue"
 
 export default {
+  middleware: 'auth',
   mounted() {
     this.getProfile()
   },
