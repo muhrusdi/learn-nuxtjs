@@ -13,54 +13,56 @@
               <div>
                 <h4>Information Detail</h4>
               </div>
-              <div class="mt-6">
-                <p-input
-                  label="Name"
-                  :fields="fields"
-                  :vFields="$v.fields"
-                  name="name"
-                  message="Tidak boleh kosong"
-                  validation="required"
-                />
-              </div>
-              <div>
-                <p-select
-                  label="Gender"
-                  :fields="fields"
-                  :vFields="$v.fields"
-                  :items="items"
-                  name="gender"
-                  message="Tidak boleh kosong"
-                  validation="required"
-                />
-              </div>
-              <div>
-                <p-datepicker
-                  label="Date of Birth"
-                  :fields="fields"
-                  :vFields="$v.fields"
-                  name="dateOfBirth"
-                  message="Tidak boleh kosong"
-                  validation="required"
-                />
-              </div>
-              <div>
-                <p-input
-                  label="Hometown"
-                  :fields="fields"
-                  :vFields="$v.fields"
-                  name="hometown"
-                  message="Tidak boleh kosong"
-                  validation="required"
-                />
-              </div>
-              <div>
-                <p-textarea
-                  label="Bio"
-                  :fields="fields"
-                  :vFields="$v.fields"
-                  name="bio"
-                />
+              <div class="mt-6 space-y-4">
+                <div>
+                  <p-input
+                    label="Name"
+                    :fields="fields"
+                    :vFields="$v.fields"
+                    name="name"
+                    message="Tidak boleh kosong"
+                    validation="required"
+                  />
+                </div>
+                <div>
+                  <p-select
+                    label="Gender"
+                    :fields="fields"
+                    :vFields="$v.fields"
+                    :items="items"
+                    name="gender"
+                    message="Tidak boleh kosong"
+                    validation="required"
+                  />
+                </div>
+                <div>
+                  <p-datepicker
+                    label="Date of Birth"
+                    :fields="fields"
+                    :vFields="$v.fields"
+                    name="dateOfBirth"
+                    message="Tidak boleh kosong"
+                    validation="required"
+                  />
+                </div>
+                <div>
+                  <p-input
+                    label="Hometown"
+                    :fields="fields"
+                    :vFields="$v.fields"
+                    name="hometown"
+                    message="Tidak boleh kosong"
+                    validation="required"
+                  />
+                </div>
+                <div>
+                  <p-textarea
+                    label="Bio"
+                    :fields="fields"
+                    :vFields="$v.fields"
+                    name="bio"
+                  />
+                </div>
               </div>
             </div>
           </div>

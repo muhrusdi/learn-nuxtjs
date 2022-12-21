@@ -1,8 +1,11 @@
 <template>
   <div>
+    <label :for="label" class="text-sm mb-2 inline-block">{{label}}</label>
     <v-textarea
       :label="label"
+      :id="label"
       outlined
+      solo
       v-model="fields[name]"
       :error-messages="errors"
       @input="vFields[name].$touch()"
