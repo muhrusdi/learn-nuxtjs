@@ -5,7 +5,7 @@
       <div class="container">
         <div class="content-inner">
           <div class="mt-12">
-            <p class="text-sm text-gray-400">Today Dec 15, 2022</p>
+            <p class="text-sm text-gray-400">Today {{currentDate()}}</p>
           </div>
           <Nuxt />
         </div>
@@ -17,12 +17,13 @@
 <script>
 import Nav from "../components/nav/index.vue"
 import Header from "../components/header/index.vue"
-import { authMenus } from "../utils"
+import { authMenus, getCurrentDate } from "../utils"
 
 export default {
   data() {
     return {
-      menus: authMenus
+      menus: authMenus,
+      currentDate: getCurrentDate
     }
   },
   components: {

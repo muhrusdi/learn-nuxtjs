@@ -42,3 +42,13 @@ export const authMenus = [
     id: "register"
   },
 ]
+
+export const getCurrentDate = () => {
+  const options = {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  };
+
+  return new Intl.DateTimeFormat('id', options).format(new Date())
+}

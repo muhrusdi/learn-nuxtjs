@@ -24,6 +24,7 @@ export default {
     '@nuxtjs/vuetify',
   ],
   vuetify: {
+    customVariables: ['./styles/variables.scss'],
     optionsPath: './plugins/vuetify.js'
   },
   css: [
