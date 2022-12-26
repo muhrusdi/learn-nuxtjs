@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  props: ["label", "fields", "vFields", "name", "message", "validation", "type"],
+  props: ["label", "fields", "vFields", "name", "message", "validation", "type", "editable"],
   data() {
     return {
       inputType: this.type,
@@ -29,6 +29,14 @@ export default {
     }
   },
   computed: {
+    // vModel: {
+    //   get() {
+    //     return this.fields[this.name]
+    //   },
+    //   set(val) {
+    //     this.$emit("input", val)
+    //   }
+    // },
     errors() {
         const errors = []
         if (!this.vFields[this.name].$dirty) return errors

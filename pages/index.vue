@@ -1,6 +1,6 @@
 <template>
   <div>
-    <home/>
+    <home />
   </div>
 </template>
 
@@ -9,17 +9,9 @@ import Home from "../containers/home/index.vue"
 
 export default {
   middleware: 'auth',
-  mounted() {
-    this.getProfile()
-  },
   fetchOnServer: false,
   components: {
     home: Home
   },
-  methods: {
-    getProfile(options) {
-      this.$store.dispatch('profile/getProfile', options)
-    }
-  }
 }
 </script>

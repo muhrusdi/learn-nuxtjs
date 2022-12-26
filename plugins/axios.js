@@ -23,7 +23,7 @@ export default function ({$axios, route}) {
     }
     if (IS_NOT_AUTH_PAGE) {
       if (error.response.status === 401) {
-        // window.location.href = "/auth/login"
+        window.location.href = "/auth/login"
       }
     }
   })

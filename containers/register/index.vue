@@ -124,9 +124,11 @@ export default {
     handleSubmit() {
       this.$v.$touch()
       if (!this.$v.$error) {
+        console.log( this.fields)
         this.$store.dispatch("profile/postRegister", {
           ...this.fields,
-          phone: this.fields.country + this.fields.phone,
+          phone: this.fields.country.value + this.fields.phone,
+          country: this.fields.country.value,
           latlong: "",
           device_token: "",
           device_type: 2, 

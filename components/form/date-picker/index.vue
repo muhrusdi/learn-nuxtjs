@@ -16,7 +16,7 @@
             prepend-icon="mdi-calendar"
             readonly
             v-bind="attrs"
-            v-model="fields[name]"
+            v-model="vModel"
             solo
             :error-messages="errors"
             @input="vFields[name].$touch()"
@@ -59,6 +59,14 @@ export default {
     }
   },
   computed: {
+    vModel: {
+      get() {
+        return this.fields[this.name]
+      },
+      set(val) {
+        this.$emit("input", val)
+      }
+    },
     errors() {
         const errors = []
         if (!this.vFields[this.name].$dirty) return errors

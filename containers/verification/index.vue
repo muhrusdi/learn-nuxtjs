@@ -82,7 +82,6 @@ export default {
           otp_code: this.fields.otp
         })
         .then((data) => {
-          console.log("---ver", data)
           const token = data.data.data.user.access_token
           setToken(token)
           window.location.href = "/auth/login"

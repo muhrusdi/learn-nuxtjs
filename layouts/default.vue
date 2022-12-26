@@ -28,8 +28,8 @@
           <div class="app-content">
             <div>
               <div>
-                <h2 class="text-3xl font-bold">Muhammad Rusdi</h2>
-                <p class="mt-1">Level 1 - #SG769891</p>
+                <h2 class="text-3xl font-bold">{{profile.name}}</h2>
+                <p class="mt-1">Level {{ profile.level }} - #{{profile.id}}</p>
               </div>
               <div>
                 <tabs :data="menus"/>
@@ -52,9 +52,22 @@ import { menus } from "../utils"
 export default {
   data() {
     return {
-      menus
+      menus,
     }
   },
+  mounted() {
+    this.getProfile()
+  },
+  computed: {
+    profile() {
+      return this.$store.get("profile/profile")
+    },
+  },
+  methods: {
+    getProfile(options) {
+      this.$store.dispatch('profile/getProfile', options)
+    }
+  },  
   components: {
     navgigation: Nav,
     "top-header": Header,

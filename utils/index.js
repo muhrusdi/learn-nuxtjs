@@ -52,3 +52,18 @@ export const getCurrentDate = () => {
 
   return new Intl.DateTimeFormat('id', options).format(new Date())
 }
+
+export const genders = {
+  null: {
+    text: "",
+    value: null
+  },
+  0: {
+    text: "Male",
+    value: 0
+  },
+  1: {
+    text: "Female",
+    value: 1
+  },
+}

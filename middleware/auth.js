@@ -3,5 +3,4 @@ export default function (props) {
   // if (!store.state.authenticated) {
   //   return redirect('/login')
   // }
-  console.log("--mid", props)
 }

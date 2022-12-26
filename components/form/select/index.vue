@@ -6,7 +6,7 @@
       :id="label"
       :label="label"
       solo
-      v-model="fields[name]"
+      v-model="vModel"
       :error-messages="errors"
       @input="vFields[name].$touch()"
       @blur="vFields[name].$touch()"
@@ -18,6 +18,14 @@
 export default {
   props: ["label", "fields", "vFields", "name", "message", "validation", "items"],
   computed: {
+    vModel: {
+      get() {
+        return this.fields[this.name]
+      },
+      set(val) {
+        this.$emit("input", val)
+      }
+    },
     errors() {
         const errors = []
         if (!this.vFields[this.name].$dirty) return errors

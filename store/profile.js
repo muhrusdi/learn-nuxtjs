@@ -1,4 +1,4 @@
-import EasyAccess, { defaultMutations } from 'vuex-easy-access'
+import { defaultMutations } from 'vuex-easy-access'
 
 export const state = () => ({
   profile: {},
@@ -8,23 +8,35 @@ export const state = () => ({
 
 export const mutations = { ...defaultMutations(state()) }
 
-export const plugins = [EasyAccess()]
+export const getters = {
+  getterProfile(state) {
+    return state.profile
+  }
+}
 
 export const actions = {
   getProfile({ dispatch }, params) {
     dispatch('set/loading', true)
 
-    this.$axios
+    return this.$axios
       .get(`profile/me`, { params })
       .then((res) => {
         dispatch('set/loading', false)
         dispatch('set/status', 'success')
-        // dispatch('set/profile', res)
-        console.log(res)
+        console.log("-datares", res)
+        dispatch('set/profile', res.data.data.user)
       })
       .catch((err) => {
-        console.error(err)
         dispatch('set/loading', false)
+      })
+  },
+  postProfile({ dispatch }, formData) {
+    this.$axios
+      .post(`profile`, formData)
+      .then((res) => {
+        dispatch('set/profile', res.data.data.user)
+      })
+      .catch((err) => {
       })
   },
   postRegister({}, formData) {

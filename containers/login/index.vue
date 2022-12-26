@@ -69,6 +69,7 @@
 import Box from "../../components/box/index.vue"
 import { required } from 'vuelidate/lib/validators'
 import Input from "../../components/form/input"
+import { setToken } from '../../utils'
 
 export default {
   data() {
@@ -106,16 +107,15 @@ export default {
           ...this.fields
         })
         .then(data => {
-          console.log("--res", data)
-          // this.$router.push({ path: '/auth/verification', query: { id:  data.error.errors[0].user_id} })
+          setToken(data.data.data.user.access_token)
+          window.location.href = "/"
         })
         .catch(err => {
           const data = err.response.data
-          console.log("--err", err.response)
           if (err.response.status === 401) {
-            // this.$store.dispatch("profile/postOTPRequest", {phone: this.fields.phone}).then(() => {
-            //   window.location.href = '/auth/verification' + "?id=" + data.error.errors[0].user_id
-            // })
+            this.$store.dispatch("profile/postOTPRequest", {phone: this.fields.phone}).then(() => {
+              window.location.href = '/auth/verification' + "?id=" + data.error.errors[0].user_id
+            })
           } else if (err.response.status === 422) {
             if (data.error.errors.length) {
               const message = data.error.errors[0]
