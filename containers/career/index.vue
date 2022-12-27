@@ -127,6 +127,11 @@ export default {
         this.$store.dispatch("profile/postCareer", {
           position: "",
           ...this.fields
+        }).then(() => {
+          this.$v.$reset()
+          Object.keys(this.fields).forEach(key => {
+            this.fields[key] = ""
+          })
         })
       }
     }
