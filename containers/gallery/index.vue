@@ -12,7 +12,7 @@
         <div>
           <div class="grid grid-cols-3 gap-4">
             <div v-for="(img, i) in states.galleries" v-bind:key="i">
-              <img class="rounded-md" :src="img.picture.url" alt="">
+              <img class="rounded-md object-cover" :src="img.picture.url" alt="" style="height: 200px">
             </div>
           </div>
         </div>

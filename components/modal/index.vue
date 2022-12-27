@@ -87,7 +87,7 @@ export default {
 
       if (e.target.files.length) {
         const file = e.target.files[0];
-        this.fields.imgs = e.target.files
+        this.fields.imgs.push(e.target.files[0])
   
         reader.onloadend = () => {
           this.fields.images.push(reader.result)
