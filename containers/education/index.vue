@@ -104,11 +104,8 @@ export default {
       educations: "profile/educations"
     }),
     isEducationExist() {
-      return Boolean(Object.keys(this.education || {}).length)
+      return Boolean(Object.keys(this.education).length)
     }
-  },
-  mounted() {
-    console.log(this.education)
   },
   components: {
     "box": Box,

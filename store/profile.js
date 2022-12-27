@@ -18,6 +18,9 @@ export const getters = {
   educations(state) {
     return state.profile.education
   },
+  galleries(state) {
+    return state.profile.user_pictures
+  },
 }
 
 export const actions = {
@@ -29,7 +32,6 @@ export const actions = {
       .then((res) => {
         dispatch('set/loading', false)
         dispatch('set/status', 'success')
-        console.log("-datares", res)
         dispatch('set/profile', res.data.data.user)
       })
       .catch((err) => {
@@ -67,6 +69,12 @@ export const actions = {
     return this.$axios.post(`profile/education`, formData)
     .then((res) => {
       dispatch('set/profile', res.data.data.user)
+    })
+  },
+  postGalleries({dispatch}, formData) {
+    return this.$axios.post(`uploads/profile`, formData)
+    .then(() => {
+      dispatch('getProfile')
     })
   },
   getCountryCode() {
