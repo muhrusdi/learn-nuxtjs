@@ -11,6 +11,9 @@ export const mutations = { ...defaultMutations(state()) }
 export const getters = {
   getterProfile(state) {
     return state.profile
+  },
+  careers(state) {
+    return state.profile.career
   }
 }
 
@@ -51,8 +54,11 @@ export const actions = {
   postVerification({}, formData) {
     return this.$axios.post(`register/otp/match`, formData)
   },
-  postCareer({}, formData) {
+  postCareer({dispatch}, formData) {
     return this.$axios.post(`profile/career`, formData)
+    .then((res) => {
+      dispatch('set/profile', res.data.data.user)
+    })
   },
   getCountryCode() {
     return fetch(window.location.origin + "/phone.json").then(d => d.json())

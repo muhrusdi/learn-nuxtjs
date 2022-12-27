@@ -112,7 +112,7 @@
           <div>
             <v-btn
               depressed
-              type="submit" @click="handleSubmit"
+              type="submit"
               color="primary"
             >
               {{ loading ? "Loading..." : "Update" }}

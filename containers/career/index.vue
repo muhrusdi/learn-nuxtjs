@@ -7,57 +7,70 @@
         </svg>
       </template>
       <div class="mt-4">
-        <div>
+        <form @submit.prevent="handleSubmit">
           <div>
             <div>
-              <h4>Information Detail</h4>
-            </div>
-            <div class="mt-6">
-              <p-input
-                label="Company Name"
-                :fields="fields"
-                :vFields="$v.fields"
-                name="company_name"
-                editable="isEdit"
-                message="Tidak boleh kosong"
-                validation="required"
-              />
-            </div>
-            <div>
-              <p-datepicker
-                label="Start From"
-                :fields="fields"
-                :vFields="$v.fields"
-                name="starting_from"
-                message="Tidak boleh kosong"
-                validation="required"
-              />
-            </div>
-            <div>
-              <p-datepicker
-                label="Ending End"
-                :fields="fields"
-                :vFields="$v.fields"
-                name="ending_in"
-                message="Tidak boleh kosong"
-                validation="required"
-              />
-            </div>
-            <div class="mt-6">
-              <div class="flex space-x-2">
-                <div>
-                  <v-btn depressed>
-                    Discard
-                  </v-btn>
-                </div>
-                <div>
-                  <v-btn depressed color="primary">
-                    Add Career
-                  </v-btn>
+              <div>
+                <h4>Information Detail</h4>
+              </div>
+              <div class="mt-6">
+                <p-input
+                  label="Company Name"
+                  :fields="fields"
+                  :vFields="$v.fields"
+                  name="company_name"
+                  editable="isEdit"
+                  message="Tidak boleh kosong"
+                  validation="required"
+                />
+              </div>
+              <div>
+                <p-datepicker
+                  label="Start From"
+                  :fields="fields"
+                  :vFields="$v.fields"
+                  name="starting_from"
+                  message="Tidak boleh kosong"
+                  validation="required"
+                />
+              </div>
+              <div>
+                <p-datepicker
+                  label="Ending End"
+                  :fields="fields"
+                  :vFields="$v.fields"
+                  name="ending_in"
+                  message="Tidak boleh kosong"
+                  validation="required"
+                />
+              </div>
+              <div class="mt-6">
+                <div class="flex space-x-2">
+                  <div>
+                    <v-btn depressed>
+                      Discard
+                    </v-btn>
+                  </div>
+                  <div>
+                    <v-btn type="submit" depressed color="primary">
+                      Add Career
+                    </v-btn>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+        </form>
+        <div class="mt-12">
+          <ul class="p-0" style="padding: 0">
+            <li>
+              <div>
+                <h4>{{ career.company_name }}</h4>
+                <p class="text-gray-400">{{career.starting_from}} - {{career.ending_in}}</p>
+              </div>
+            </li>
+           
+          </ul>
         </div>
       </div>
     </box>
@@ -69,10 +82,12 @@ import Box from "../../components/box"
 import { required } from 'vuelidate/lib/validators'
 import Input from "../../components/form/input/index.vue"
 import DatePicker from "../../components/form/date-picker/index.vue"
+import { mapGetters } from "vuex"
 
 export default {
   data() {
     return {
+      career: {},
       fields: {
         company_name: "",
         starting_from: null,
@@ -92,11 +107,24 @@ export default {
     "p-input": Input,
     "p-datepicker": DatePicker,
   },
+  watch: {
+    careers: {
+        immediate: true,
+        handler(career) {
+          this.career = career
+        }
+     }
+  },
+  computed: {
+    ...mapGetters({
+      careers: "profile/careers"
+    }) 
+  },
   methods: {
     handleSubmit() {
       this.$v.$touch()
       if (!this.$v.$error) {
-        this.$store.dispatch("postCareer", {
+        this.$store.dispatch("profile/postCareer", {
           position: "",
           ...this.fields
         })
