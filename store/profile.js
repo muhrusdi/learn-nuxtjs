@@ -51,6 +51,9 @@ export const actions = {
   postVerification({}, formData) {
     return this.$axios.post(`register/otp/match`, formData)
   },
+  postCareer({}, formData) {
+    return this.$axios.post(`profile/career`, formData)
+  },
   getCountryCode() {
     return fetch(window.location.origin + "/phone.json").then(d => d.json())
   },

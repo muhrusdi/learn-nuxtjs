@@ -13,89 +13,35 @@
               <h4>Information Detail</h4>
             </div>
             <div class="mt-6">
-              <v-text-field
+              <p-input
                 label="Company Name"
-                required
-                outlined
-              ></v-text-field>
+                :fields="fields"
+                :vFields="$v.fields"
+                name="company_name"
+                editable="isEdit"
+                message="Tidak boleh kosong"
+                validation="required"
+              />
             </div>
             <div>
-              <v-menu
-                ref="menu"
-                :close-on-content-click="false"
-                transition="scale-transition"
-                offset-y
-                min-width="auto"
-              >
-                <template v-slot:activator="{ on, attrs }">
-                  <v-text-field
-                    label="Start From"
-                    prepend-icon="mdi-calendar"
-                    readonly
-                    v-bind="attrs"
-                    v-on="on"
-                  ></v-text-field>
-                </template>
-                <v-date-picker
-                  no-title
-                  scrollable
-                >
-                  <v-spacer></v-spacer>
-                  <v-btn
-                    text
-                    color="primary"
-                    @click="menu = false"
-                  >
-                    Cancel
-                  </v-btn>
-                  <v-btn
-                    text
-                    color="primary"
-                    @click="$refs.menu.save(date)"
-                  >
-                    OK
-                  </v-btn>
-                </v-date-picker>
-              </v-menu>
+              <p-datepicker
+                label="Start From"
+                :fields="fields"
+                :vFields="$v.fields"
+                name="starting_from"
+                message="Tidak boleh kosong"
+                validation="required"
+              />
             </div>
             <div>
-              <v-menu
-                ref="menu"
-                :close-on-content-click="false"
-                transition="scale-transition"
-                offset-y
-                min-width="auto"
-              >
-                <template v-slot:activator="{ on, attrs }">
-                  <v-text-field
-                    label="Ending End"
-                    prepend-icon="mdi-calendar"
-                    readonly
-                    v-bind="attrs"
-                    v-on="on"
-                  ></v-text-field>
-                </template>
-                <v-date-picker
-                  no-title
-                  scrollable
-                >
-                  <v-spacer></v-spacer>
-                  <v-btn
-                    text
-                    color="primary"
-                    @click="menu = false"
-                  >
-                    Cancel
-                  </v-btn>
-                  <v-btn
-                    text
-                    color="primary"
-                    @click="$refs.menu.save(date)"
-                  >
-                    OK
-                  </v-btn>
-                </v-date-picker>
-              </v-menu>
+              <p-datepicker
+                label="Ending End"
+                :fields="fields"
+                :vFields="$v.fields"
+                name="ending_in"
+                message="Tidak boleh kosong"
+                validation="required"
+              />
             </div>
             <div class="mt-6">
               <div class="flex space-x-2">
@@ -120,15 +66,42 @@
 
 <script>
 import Box from "../../components/box"
+import { required } from 'vuelidate/lib/validators'
+import Input from "../../components/form/input/index.vue"
+import DatePicker from "../../components/form/date-picker/index.vue"
 
 export default {
   data() {
     return {
-      items: ['Male', 'Female'],
+      fields: {
+        company_name: "",
+        starting_from: null,
+        ending_in: null
+      }
+    }
+  },
+  validations: {
+    fields: {
+      company_name: {required},
+      starting_from: {required},
+      ending_in: {required},
     }
   },
   components: {
-    box: Box
+    "box": Box,
+    "p-input": Input,
+    "p-datepicker": DatePicker,
+  },
+  methods: {
+    handleSubmit() {
+      this.$v.$touch()
+      if (!this.$v.$error) {
+        this.$store.dispatch("postCareer", {
+          position: "",
+          ...this.fields
+        })
+      }
+    }
   }
 }
 </script>
