@@ -61,15 +61,14 @@
             </div>
           </div>
         </form>
-        <div class="mt-12">
+        <div v-if="isCareerExist" class="mt-12">
           <ul class="p-0" style="padding: 0">
             <li>
               <div>
                 <h4>{{ career.company_name }}</h4>
                 <p class="text-gray-400">{{career.starting_from}} - {{career.ending_in}}</p>
               </div>
-            </li>
-           
+            </li> 
           </ul>
         </div>
       </div>
@@ -118,7 +117,10 @@ export default {
   computed: {
     ...mapGetters({
       careers: "profile/careers"
-    }) 
+    }),
+    isCareerExist() {
+      return Boolean(Object.keys(this.career).length)
+    }
   },
   methods: {
     handleSubmit() {

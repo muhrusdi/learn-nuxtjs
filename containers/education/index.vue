@@ -7,73 +7,60 @@
         </svg>
       </template>
       <div class="mt-4">
-        <div>
+        <form @submit.prevent="handleSubmit">
+        
           <div>
             <div>
-              <h4>Information Detail</h4>
-            </div>
-            <div class="mt-6">
-              <v-text-field
-                label="Education Name"
-                required
-                outlined
-              ></v-text-field>
-            </div>
-            <div>
-              <v-menu
-                ref="menu"
-                :close-on-content-click="false"
-                transition="scale-transition"
-                offset-y
-                min-width="auto"
-              >
-                <template v-slot:activator="{ on, attrs }">
-                  <v-text-field
+              <div>
+                <h4>Information Detail</h4>
+              </div>
+              <div class="mt-6">
+                <p-input
+                    label="Education Name"
+                    :fields="fields"
+                    :vFields="$v.fields"
+                    name="school_name"
+                    message="Tidak boleh kosong"
+                    validation="required"
+                  />
+              </div>
+              <div>
+                <p-datepicker
                     label="Graduation Time"
-                    prepend-icon="mdi-calendar"
-                    readonly
-                    v-bind="attrs"
-                    v-on="on"
-                  ></v-text-field>
-                </template>
-                <v-date-picker
-                  no-title
-                  scrollable
-                >
-                  <v-spacer></v-spacer>
-                  <v-btn
-                    text
-                    color="primary"
-                    @click="menu = false"
-                  >
-                    Cancel
-                  </v-btn>
-                  <v-btn
-                    text
-                    color="primary"
-                    @click="$refs.menu.save(date)"
-                  >
-                    OK
-                  </v-btn>
-                </v-date-picker>
-              </v-menu>
-            </div>
-            
-            <div class="mt-6">
-              <div class="flex space-x-2">
-                <div>
-                  <v-btn depressed>
-                    Discard
-                  </v-btn>
-                </div>
-                <div>
-                  <v-btn depressed color="primary">
-                    Add Education
-                  </v-btn>
+                    :fields="fields"
+                    :vFields="$v.fields"
+                    name="graduation_time"
+                    message="Tidak boleh kosong"
+                    validation="required"
+                  />
+              </div>
+              
+              <div class="mt-6">
+                <div class="flex space-x-2">
+                  <div>
+                    <v-btn depressed>
+                      Discard
+                    </v-btn>
+                  </div>
+                  <div>
+                    <v-btn depressed type="submit" color="primary">
+                      Add Education
+                    </v-btn>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+        </form>
+        <div v-if="isEducationExist" class="mt-12">
+          <ul class="p-0" style="padding: 0">
+            <li>
+              <div>
+                <h4>{{ education.school_name }}</h4>
+                <p class="text-gray-400">{{education.graduation_time}}</p>
+              </div>
+            </li> 
+          </ul>
         </div>
       </div>
     </box>
@@ -82,15 +69,64 @@
 
 <script>
 import Box from "../../components/box"
+import Input from "../../components/form/input/index.vue"
+import { required } from 'vuelidate/lib/validators'
+import { mapGetters } from "vuex"
+import DatePicker from "../../components/form/date-picker/index.vue"
 
 export default {
   data() {
     return {
       items: ['Male', 'Female'],
+      education: {},
+      fields: {
+        school_name: "",
+        graduation_time: ""
+      }
     }
   },
+  validations: {
+    fields: {
+      school_name: {required},
+      graduation_time: {required},
+    }
+  },
+  watch: {
+    educations: {
+        immediate: true,
+        handler(edu) {
+          this.education = edu
+        }
+     }
+  },
+  computed: {
+    ...mapGetters({
+      educations: "profile/educations"
+    }),
+    isEducationExist() {
+      return Boolean(Object.keys(this.education || {}).length)
+    }
+  },
+  mounted() {
+    console.log(this.education)
+  },
   components: {
-    box: Box
+    "box": Box,
+    "p-input": Input,
+    "p-datepicker": DatePicker,
+  },
+  methods: {
+    handleSubmit() {
+      this.$v.$touch()
+      if (!this.$v.$error) {
+        this.$store.dispatch("profile/postEducation", this.fields).then(() => {
+          this.$v.$reset()
+          Object.keys(this.fields).forEach(key => {
+            this.fields[key] = ""
+          })
+        })
+      }
+    }
   }
 }
 </script>

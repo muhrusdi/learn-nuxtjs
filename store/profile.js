@@ -14,7 +14,10 @@ export const getters = {
   },
   careers(state) {
     return state.profile.career
-  }
+  },
+  educations(state) {
+    return state.profile.education
+  },
 }
 
 export const actions = {
@@ -56,6 +59,12 @@ export const actions = {
   },
   postCareer({dispatch}, formData) {
     return this.$axios.post(`profile/career`, formData)
+    .then((res) => {
+      dispatch('set/profile', res.data.data.user)
+    })
+  },
+  postEducation({dispatch}, formData) {
+    return this.$axios.post(`profile/education`, formData)
     .then((res) => {
       dispatch('set/profile', res.data.data.user)
     })
