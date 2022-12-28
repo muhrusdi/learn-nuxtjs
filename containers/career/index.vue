@@ -110,7 +110,7 @@ export default {
     careers: {
         immediate: true,
         handler(career) {
-          this.career = career
+          this.career = career || {}
         }
      }
   },

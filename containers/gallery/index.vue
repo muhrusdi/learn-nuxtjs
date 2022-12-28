@@ -48,7 +48,7 @@ export default {
     galleries: {
         immediate: true,
         handler(galleries) {
-          this.states.galleries = galleries
+          this.states.galleries = galleries || {}
         }
      }
   },
