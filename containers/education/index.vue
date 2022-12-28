@@ -95,7 +95,7 @@ export default {
     educations: {
         immediate: true,
         handler(edu) {
-          this.education = edu
+          this.education = edu || {}
         }
      }
   },
@@ -118,7 +118,7 @@ export default {
       if (!this.$v.$error) {
         this.$store.dispatch("profile/postEducation", this.fields).then(() => {
           this.$v.$reset()
-          Object.keys(this.fields).forEach(key => {
+          this.fields && Object.keys(this.fields).forEach(key => {
             this.fields[key] = ""
           })
         })
