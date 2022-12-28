@@ -8,16 +8,40 @@
         <h1 class="text-2xl font-black">Welcome to Prisign</h1>
         <p class="mt-4 text-gray-300">Is a personal data platform, you can update your information about yourself, customize your profile and change a lot of things</p>
       </div>
+      <div v-if="!isLoginPage" class="fixed bottom-10 left-8">
+        <v-btn
+          class="mx-2"
+          @click="handleLogout"
+          fab
+          dark
+          small
+          color="primary"
+          >
+          <v-icon>mdi-logout-variant</v-icon>
+        </v-btn>
+      </div>
     </div>
   </nav>
 </template>
 
 <script>
+import { removeToken } from '../../utils'
 import Logo from "../brand/index.vue"
 
 export default {
   components: {
     logo: Logo
+  },
+  computed: {
+    isLoginPage() {
+      return this.$route.path === "/auth/login"
+    }
+  },
+  methods: {
+    handleLogout() {
+      removeToken()
+      window.location.href = "/"
+    }
   }
 }
 </script>

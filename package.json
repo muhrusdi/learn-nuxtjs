@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "4.2.1",
+    "cookie-universal-nuxt": "^2.2.2",
     "postcss-pxtorem": "^6.0.0"
   }
 }

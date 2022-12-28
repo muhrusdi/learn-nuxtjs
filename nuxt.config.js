@@ -1,15 +1,19 @@
 import { join } from "path"
 
 export default {
-  babel:{
-    plugins: [
-      ['@babel/plugin-proposal-private-methods', { loose: true }],
-      ['@babel/plugin-proposal-class-properties', { loose: true }],
-      ['@babel/plugin-proposal-private-property-in-object', { loose: true }],
-      ['@babel/preset-env', { loose: false }],
-    ]
+  ssr: true,
+  target: 'server',
+  router: {
+    middleware: 'auth'
   },
   build: {
+    babel:{
+      plugins: [
+        ['@babel/plugin-proposal-private-methods', { loose: true }],
+        ['@babel/plugin-proposal-class-properties', { loose: true }],
+        ['@babel/plugin-proposal-private-property-in-object', { loose: true }],
+      ]
+    },
     postcss: {
       plugins: {
         tailwindcss: join(__dirname, 'tailwind.config.js'),
@@ -32,7 +36,8 @@ export default {
   ],
   modules: [
     '@nuxtjs/tailwindcss',
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    'cookie-universal-nuxt'
   ],
   plugins: [
     { src: './plugins/vuelidate.js' },
