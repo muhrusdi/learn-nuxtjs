@@ -34,7 +34,7 @@ export default {
   },
   computed: {
     isLoginPage() {
-      return this.$route.path === "/auth/login"
+      return this.$route.path === "/auth/login" || this.$route.path === "/auth/register" || this.$route.path === "/auth/verification"
     }
   },
   methods: {

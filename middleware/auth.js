@@ -8,15 +8,8 @@ export default function ({app, redirect, route}) {
       return redirect('/')
     }
   } else {
-    switch(route.path) {
-      case "/auth/verification": {
-        return redirect(router.path)
-      }
-      case "/auth/register": {
-        return redirect(router.path)
-      }
-      default:
-        return redirect("/auth/login")
+    if (!route.path.includes("/auth")) {
+      return redirect("/auth/login")
     }
   }
 }
