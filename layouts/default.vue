@@ -88,7 +88,11 @@ export default {
   },
   methods: {
     getProfile(options) {
-      this.$store.dispatch('profile/getProfile', options)
+      this.$nuxt.$loading.start()
+      this.$store.dispatch('profile/getProfile', options).then(() => {
+        this.$nuxt.$loading.stop()
+
+      })
     },
     handleVisible() {
       this.states.visible = true
