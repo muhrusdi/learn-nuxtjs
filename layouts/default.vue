@@ -2,11 +2,11 @@
   <v-app v-bind:style="{ background: this.$vuetify.theme.themes.dark.background}">
     <navgigation/>
     <div class="content">
-      <top-header/>
+      <top-header :image="cover"/>
       <div class="container">
         <div class="content-inner">
           <div class="absolute right-0 -top-14">
-            <button class="button py-2 px-6 rounded-full">
+            <button type="button" @click="handleVisible" class="button py-2 px-6 rounded-full">
               <div class="flex items-center space-x-2">
                 <div>
                   <svg width="18" height="18" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -20,11 +20,12 @@
                   </svg>
                 </div>
                 <div>
-                  <span>Change Cover</span>
+                  <span class="text-green-500">Change Cover</span>
                 </div>
               </div>
             </button>
           </div>
+          <modal :states="states" :fields="fields" name="images" :onupload="handleSubmit"/>
           <div class="app-content">
             <div>
               <div>
@@ -48,30 +49,68 @@ import Nav from "../components/nav/index.vue"
 import Header from "../components/header/index.vue"
 import Tabs from "../components/tabs/index.vue"
 import { menus } from "../utils"
+import Modal from "../components/modal/index.vue"
+import { mapGetters } from "vuex"
 
 export default {
   data() {
     return {
       menus,
+      states: {
+        visible: false,
+        galleries: []
+      },
+      cover: "",
+      fields: {
+        images: [],
+        imgs: []
+      }
     }
   },
   mounted() {
     this.getProfile()
   },
+  watch: {
+    profile: {
+        immediate: true,
+        handler(profile) {
+          this.cover = profile.cover_picture && profile.cover_picture.url || "https://images.unsplash.com/photo-1670832215724-cce6d9ee619c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80"
+        }
+     }
+  },
   computed: {
     profile() {
       return this.$store.get("profile/profile")
     },
+    ...mapGetters({
+      profile: "profile/getterProfile"
+    }) 
   },
   methods: {
     getProfile(options) {
       this.$store.dispatch('profile/getProfile', options)
+    },
+    handleVisible() {
+      this.states.visible = true
+    },
+    handleSubmit() {
+      if (this.fields.images.length) {
+        const formData = new FormData();
+        formData.append("image", this.fields.imgs[0]);
+        this.$store.dispatch("profile/postCover", formData)
+        .then(() => {
+          this.states.visible = false
+          this.fields.images = []
+          this.fields.imgs = []
+        })
+      }
     }
   },  
   components: {
-    navgigation: Nav,
+    "navgigation": Nav,
     "top-header": Header,
-    tabs: Tabs,
+    "tabs": Tabs,
+    "modal": Modal
   }
 }
 </script>

@@ -2,7 +2,6 @@
   <div>
     <v-dialog
       v-model="states.visible"
-      click:outside="handleClose"
       width="500"
     >
       <v-card>
@@ -76,7 +75,7 @@ export default {
   computed: {
     isImagesExist() {
       return Boolean(this.fields.images.length)
-    }
+    },
   },
   methods: {
     handleSelect() {

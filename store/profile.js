@@ -77,6 +77,12 @@ export const actions = {
       dispatch('getProfile')
     })
   },
+  postCover({dispatch}, formData) {
+    return this.$axios.post(`uploads/cover`, formData)
+    .then(() => {
+      dispatch('getProfile')
+    })
+  },
   getCountryCode() {
     return fetch(window.location.origin + "/phone.json").then(d => d.json())
   },
