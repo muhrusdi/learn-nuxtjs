@@ -16,7 +16,7 @@ export default function ({app, redirect, route}) {
         return redirect(router.path)
       }
       default:
-      return redirect("/auth/login")
+        return redirect("/auth/login")
     }
   }
 }
