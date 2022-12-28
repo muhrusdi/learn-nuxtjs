@@ -1,6 +1,6 @@
 import { getToken } from "../utils"
 
-export default function ({$axios, route, app}) {
+export default function ({$axios, route}) {
   const BASE_URL = process.env.baseUrl
   const VERSION = "v1"
   const PREFIX = "custom"
@@ -11,16 +11,9 @@ export default function ({$axios, route, app}) {
   
   $axios.onRequest((config) => {
     if (IS_NOT_AUTH_PAGE) {
-      app.$nuxt.$loading.start()
       $axios.setHeader('Authorization', "Bearer " + getToken())
     }
   })
-
-  $axios.onResponse((config) => {
-      app.$nuxt.$loading.stop()
-  })
-
-
 
   $axios.onError(error => {
     if(error.response.status === 500) {
