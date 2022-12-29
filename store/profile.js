@@ -94,6 +94,9 @@ export const actions = {
   postProfilePictureUpdate({dispatch}, formData) {
     return this.$axios.post(`uploads/profile`, formData)
   },
+  postProfilePictureDefault({dispatch}, formData) {
+    return this.$axios.post(`uploads/profile/default`, formData)
+  },
   getCountryCode() {
     return fetch(window.location.origin + "/phone.json").then(d => d.json())
   },

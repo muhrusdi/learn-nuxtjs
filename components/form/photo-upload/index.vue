@@ -27,8 +27,9 @@ export default {
 
         this.handleUpload(file)
         .then(data => {
-          console.log(data)
             this.fields[this.name] = data.data.data.user_picture.picture.url
+            this.$store.dispatch("profile/postProfilePictureDefault", {id: data.data.data.user_picture.id})
+            this.$router.push("/")
         })
   
         // reader.onloadend = () => {
