@@ -159,7 +159,7 @@ export default {
           this.fields.gender = profile.gender
           this.fields.birthday = profile.birthday
           this.fields.hometown = profile.hometown
-          this.fields.profilePicture = profile.profilePicture || "https://images.unsplash.com/photo-1670832215724-cce6d9ee619c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80"
+          this.fields.profilePicture = profile.user_picture && profile.user_picture.picture.url || "https://images.unsplash.com/photo-1670832215724-cce6d9ee619c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80"
           this.fields.bio = profile.bio
         }
      }
@@ -203,7 +203,7 @@ export default {
           name: this.fields.name,
           birthday: this.fields.birthday,
           gender: 0,
-          picture: this.fields.picture,
+          picture: this.fields.profilePicture,
           hometown: this.fields.hometown,
           bio: this.fields.bio
         })

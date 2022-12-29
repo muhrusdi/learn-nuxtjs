@@ -2,7 +2,12 @@ import { defaultMutations } from 'vuex-easy-access'
 
 export const state = () => ({
   profile: {},
-  loading: false,
+  loading: {
+    value: 24,
+    show: true,
+    query: false,
+    interval: 0
+  },
   status: '',
 })
 
@@ -21,6 +26,9 @@ export const getters = {
   galleries(state) {
     return state.profile.user_pictures
   },
+  loadings(state) {
+    return state.loading
+  },
 }
 
 export const actions = {
@@ -28,7 +36,7 @@ export const actions = {
     dispatch('set/loading', true)
 
     return this.$axios
-      .get(`profile/me`, { params })
+      .get(`profile/me`, { params }, { progress: true })
       .then((res) => {
         dispatch('set/loading', false)
         dispatch('set/status', 'success')
@@ -82,6 +90,9 @@ export const actions = {
     .then(() => {
       dispatch('getProfile')
     })
+  },
+  postProfilePictureUpdate({dispatch}, formData) {
+    return this.$axios.post(`uploads/profile`, formData)
   },
   getCountryCode() {
     return fetch(window.location.origin + "/phone.json").then(d => d.json())

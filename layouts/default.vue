@@ -50,6 +50,7 @@ import Header from "../components/header/index.vue"
 import Tabs from "../components/tabs/index.vue"
 import { menus } from "../utils"
 import Modal from "../components/modal/index.vue"
+import Loading from "../components/loading/index.vue"
 import { mapGetters } from "vuex"
 
 export default {
@@ -88,6 +89,7 @@ export default {
   },
   methods: {
     getProfile(options) {
+      
       this.$store.dispatch('profile/getProfile', options)
     },
     handleVisible() {
@@ -110,7 +112,8 @@ export default {
     "navgigation": Nav,
     "top-header": Header,
     "tabs": Tabs,
-    "modal": Modal
+    "modal": Modal,
+    "loading": Loading
   }
 }
 </script>
